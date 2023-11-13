@@ -30,7 +30,7 @@ function setError(error) {
   errorNode.innerText = error ? String(error) : '';
 }
 
-/**
+/** Display error text on the page
  * @param {string} jsonUrl
  */
 async function loadJson(jsonUrl) {
@@ -193,7 +193,7 @@ function getNodeForId(nodesHash, id) {
   return node;
 }
 
-/**
+/** Create chart data from the data set
  * @param {TFullDataSet} fullDataSet
  */
 function constructEdgesData(fullDataSet) {
@@ -251,7 +251,7 @@ function constructEdgesData(fullDataSet) {
   return chartData;
 }
 
-/**
+/** Get demo chart data (from anychart examples)
  * @return {TChartData[]}
  */
 function getDemoData() {
@@ -277,7 +277,7 @@ function getDemoData() {
   return chartData;
 }
 
-/**
+/** Get current chart data wrapper
  * @param {TFullDataSet} fullDataSet
  * @return {TChartData[]}
  */
@@ -288,6 +288,7 @@ function getChartData(fullDataSet) {
   return constructEdgesData(fullDataSet);
 }
 
+/** Display chart with demo or actual data */
 async function drawChart() {
   const fullData = await loadFullData();
   const chartData = getChartData(fullData);
@@ -305,6 +306,7 @@ async function drawChart() {
   chart.draw();
 }
 
+/** Main function to display chart */
 export function start() {
   anychart.onDocumentReady(drawChart);
 }
