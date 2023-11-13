@@ -9,6 +9,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.9",
     "@babel/plugin-proposal-decorators": "^7.22.7",
+    "@babel/plugin-syntax-import-attributes": "^7.23.3",
     "@babel/preset-env": "^7.22.9",
     "cross-env": "^7.0.3",
     "eslint": "^8.45.0",
@@ -22,20 +23,15 @@
     "npm-package-user-scripts-list": "^0.1.10",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.0.0",
-    "stylelint": "^15.10.2",
-    "stylelint-config-recommended": "^13.0.0",
-    "stylelint-config-standard": "^34.0.0",
     "typescript": "^5.1.6"
   },
   "author": "",
   "license": "ISC",
   "scripts": {
     "prettier": "echo --Run prettier-- && prettier --write --cache . | grep -v '(cached)' || true",
-    "stylelint": "echo --Lint styles-- && stylelint examples/**/*.{css,scss,less}",
-    "stylelint-fix": "echo --Lint styles-- && stylelint examples/**/*.{css,scss,less} --fix",
-    "lint": "echo --Lint sources-- && eslint examples --ext js",
+    "eslint": "echo --Lint sources-- && eslint examples --ext js",
     "type-check": "echo --Run typescript linter-- && tsc --pretty --noEmit",
-    "check-all": "echo --Run all pre-commit check-ups-- && npm-run-all prettier stylelint lint type-check && echo --All check-ups are passed--",
+    "check-all": "echo --Run all pre-commit check-ups-- && npm-run-all prettier eslint type-check && echo --All check-ups are passed--",
     "start": "serve ./",
     "help": "echo --List all available script commands-- && npm-package-user-scripts-list"
   }

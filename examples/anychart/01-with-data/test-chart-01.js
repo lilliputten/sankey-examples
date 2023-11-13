@@ -1,5 +1,10 @@
 // @ts-check
 /* global anychart */
+/* eslint-disable no-console */
+
+/* TODO:
+ * - 2023.11.13, 22:24 -- Define basic types.
+ */
 
 import edgesData from '../../data/set-231113-chris/lignite/edges.json' assert { type: 'json' };
 import flowsData from '../../data/set-231113-chris/lignite/flows.json' assert { type: 'json' };
@@ -48,7 +53,9 @@ function getGraphForId(id) {
   const graph = graphsHash[id];
   if (!graph) {
     const error = new Error('Cannot find graph for id "' + id + '"');
+    // eslint-disable-next-line no-console
     console.error('[getGraphForId]', error);
+    // eslint-disable-next-line no-debugger
     debugger;
     throw error;
   }
@@ -60,6 +67,7 @@ function getNodeForId(id) {
   if (!node) {
     if (id === -1) {
       const error = new Error('Construct root node for absent id = -1');
+      // eslint-disable-next-line no-console
       console.warn('[getNodeForId]', error);
       return {
         name: 'Root node',
@@ -67,6 +75,7 @@ function getNodeForId(id) {
       };
     } else {
       const error = new Error('Cannot find node for id "' + id + '"');
+      // eslint-disable-next-line no-console
       console.warn('[getNodeForId]', error);
       return {
         name: 'Node ' + id,
@@ -153,8 +162,7 @@ export function drawChart() {
   const data = getChartData();
 
   // Create a sankey diagram instance
-  // @ts-ignore
-  let chart = anychart.sankey();
+  const chart = anychart.sankey();
 
   // Load the data to the sankey diagram instance
   chart.data(data);
