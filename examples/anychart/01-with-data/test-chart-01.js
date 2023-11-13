@@ -78,14 +78,6 @@ async function loadFullData() {
       ]) => {
         const graphsHash = constructGraphsHashFromSupplyChain(nodesSupplyChainData);
         const nodesHash = constructNodesHashFromNodes(nodesData);
-        console.log('[loadFullData]', {
-          edgesData,
-          flowsData,
-          nodesSupplyChainData,
-          nodesData,
-          graphsHash,
-          nodesHash,
-        });
         /** @type {TFullDataSet} */
         const fullDataSet = {
           edgesData,
@@ -95,6 +87,7 @@ async function loadFullData() {
           graphsHash,
           nodesHash,
         };
+        console.log('[loadFullData]', fullDataSet);
         return fullDataSet;
       },
     )
