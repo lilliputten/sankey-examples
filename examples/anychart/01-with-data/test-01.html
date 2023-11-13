@@ -1,9 +1,13 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>JavaScript Sankey Diagram</title>
     <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
     <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-sankey.min.js"></script>
     <style type="text/css">
+      body {
+        font-family: sans-serif;
+      }
       html,
       body,
       #container {
@@ -12,13 +16,22 @@
         margin: 0;
         padding: 0;
       }
+      #error {
+        background-color: #c33;
+        color: #fff;
+        padding: 12px 16px;
+      }
+      #error:empty {
+        display: none;
+      }
     </style>
   </head>
   <body>
+    <div id="error"></div>
     <div id="container"></div>
     <script type="module">
-      import { drawChart } from './test-chart-01.js';
-      anychart.onDocumentReady(drawChart);
+      import { start } from './test-chart-01.js';
+      start();
     </script>
   </body>
 </html>
