@@ -10,7 +10,6 @@ const dataUrl = '../../data/set-231113-chris/';
 /** Specific data set path (for all other data: we can choose different sets here) */
 const dataSetUrl = dataUrl + 'lignite/';
 
-/** @param {string} url */
 // Graph parameters...
 const graphName = 'Graph with provided data / test 1';
 const containerId = 'container';
