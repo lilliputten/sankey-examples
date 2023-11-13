@@ -59,7 +59,7 @@ async function loadJson(jsonUrl) {
 }
 
 /** Load all required data
- * @return Promise<TFullDataSet>
+ * @return {Promise<TFullDataSet>}
  */
 async function loadFullData() {
   const promises = [
@@ -107,6 +107,7 @@ async function loadFullData() {
       // eslint-disable-next-line no-debugger
       debugger;
       setError(error);
+      throw error;
     });
 }
 
