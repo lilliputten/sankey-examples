@@ -299,7 +299,4 @@ async function drawChart() {
   chart.draw();
 }
 
-/** Main function to display chart */
-export function start() {
-  anychart.onDocumentReady(drawChart);
-}
+anychart.onDocumentReady(drawChart);
