@@ -73,16 +73,16 @@ async function loadFullData() {
         // prettier-ignore
         edgesData,
         flowsData,
-        nodesSupplyChainData,
+        graphsData,
         nodesData,
       ]) => {
-        const graphsHash = constructGraphsHashFromSupplyChain(nodesSupplyChainData);
-        const nodesHash = constructNodesHashFromNodes(nodesData);
+        const graphsHash = constructGraphsHashGraphsData(graphsData);
+        const nodesHash = constructNodesHashFromData(nodesData);
         /** @type {TFullDataSet} */
         const fullDataSet = {
           edgesData,
           flowsData,
-          nodesSupplyChainData,
+          graphsData,
           nodesData,
           graphsHash,
           nodesHash,
@@ -104,20 +104,20 @@ async function loadFullData() {
 }
 
 /**
- * @param {TGraphsData} nodesSupplyChainData
+ * @param {TGraphsData} graphsData
  * @return {TGraphHash}
  */
-function constructGraphsHashFromSupplyChain(nodesSupplyChainData) {
+function constructGraphsHashGraphsData(graphsData) {
   // TODO: Detect duplicated ids?
   /** @type {TGraphHash} */
-  const graphsHash = nodesSupplyChainData.reduce((hash, graph) => {
+  const graphsHash = graphsData.reduce((hash, graph) => {
     const { id_in_graph: id } = graph;
     hash[id] = graph;
     return hash;
   }, {});
-  console.log('[constructGraphsHashFromSupplyChain] finish', {
+  console.log('[constructGraphsHashGraphsData] finish', {
     graphsHash,
-    nodesSupplyChainData,
+    graphsData,
   });
   return graphsHash;
 }
@@ -126,7 +126,7 @@ function constructGraphsHashFromSupplyChain(nodesSupplyChainData) {
  * @param {TNodesData} nodesData
  * @return {TNodeHash}
  */
-function constructNodesHashFromNodes(nodesData) {
+function constructNodesHashFromData(nodesData) {
   // TODO: Detect duplicated ids?
   /** @type {TNodeHash} */
   const nodesHash = nodesData.reduce((hash, node) => {
@@ -134,7 +134,7 @@ function constructNodesHashFromNodes(nodesData) {
     hash[id] = node;
     return hash;
   }, {});
-  console.log('[constructNodesHashFromNodes] finish', {
+  console.log('[constructNodesHashFromData] finish', {
     nodesHash,
     nodesData,
   });
@@ -193,7 +193,7 @@ function constructEdgesData(fullDataSet) {
   const {
     edgesData, // TEdgesData;
     flowsData, // TFlowsData;
-    nodesSupplyChainData, // TGraphsData;
+    graphsData, // TGraphsData;
     // nodesData, // TNodesData;
     graphsHash, // TGraphHash;
     nodesHash, // TNodeHash;
@@ -201,10 +201,10 @@ function constructEdgesData(fullDataSet) {
   console.log('[constructEdgesData] start', {
     edgesData,
     flowsData,
-    nodesSupplyChainData,
+    graphsData,
     // nodesData,
   });
-  /** @type {TChartData[]} */
+  /** @type {TAnyChartData} */
   const chartData = edgesData.map(
     ({
       producer_graph_id: toId, // 2,
@@ -229,7 +229,7 @@ function constructEdgesData(fullDataSet) {
        *   toNode,
        * });
        */
-      /** @type {TChartData} */
+      /** @type {TAnyChartRecord} */
       const chartDataItem = {
         from: fromName,
         to: toName,
@@ -245,10 +245,10 @@ function constructEdgesData(fullDataSet) {
 }
 
 /** Get demo chart data (from anychart examples)
- * @return {TChartData[]}
+ * @return {TAnyChartData}
  */
 function getDemoData() {
-  /** @type {TChartData[]} */
+  /** @type {TAnyChartData} */
   const chartData = [
     { from: 'First Class', to: 'Child', value: 6 },
     { from: 'Second Class', to: 'Child', value: 24 },
@@ -272,7 +272,7 @@ function getDemoData() {
 
 /** Get current chart data wrapper
  * @param {TFullDataSet} fullDataSet
- * @return {TChartData[]}
+ * @return {TAnyChartData}
  */
 function getChartData(fullDataSet) {
   if (useDemoData) {

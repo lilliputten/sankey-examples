@@ -17,7 +17,7 @@ type TNodeHash = Record<TNodeId, TNodeItem>;
 interface TDataSet {
   edgesData: TEdgesData;
   flowsData: TFlowsData;
-  nodesSupplyChainData: TGraphsData;
+  graphsData: TGraphsData;
   nodesData: TNodesData;
 }
 
@@ -26,8 +26,9 @@ interface TFullDataSet extends TDataSet {
   nodesHash: TNodeHash;
 }
 
-interface TChartData {
+interface TAnyChartRecord {
   from: string;
   to: string;
   value: number;
 }
+type TAnyChartData = TAnyChartRecord[];
