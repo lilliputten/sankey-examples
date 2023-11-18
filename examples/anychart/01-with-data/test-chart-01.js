@@ -104,7 +104,7 @@ async function loadFullData() {
 }
 
 /**
- * @param {TGraphNode[]} nodesSupplyChainData
+ * @param {TGraphsData} nodesSupplyChainData
  * @return {TGraphHash}
  */
 function constructGraphsHashFromSupplyChain(nodesSupplyChainData) {
@@ -123,12 +123,12 @@ function constructGraphsHashFromSupplyChain(nodesSupplyChainData) {
 }
 
 /**
- * @param {TDatabaseNode[]} nodesData
- * @return {TDatabaseHash}
+ * @param {TNodesData} nodesData
+ * @return {TNodeHash}
  */
 function constructNodesHashFromNodes(nodesData) {
   // TODO: Detect duplicated ids?
-  /** @type {TDatabaseHash} */
+  /** @type {TNodeHash} */
   const nodesHash = nodesData.reduce((hash, node) => {
     const { id } = node;
     hash[id] = node;
@@ -159,8 +159,8 @@ function getGraphForId(graphsHash, id) {
 }
 
 /**
- * @param {TDatabaseHash} nodesHash
- * @param {TDatabaseId} id
+ * @param {TNodeHash} nodesHash
+ * @param {TNodeId} id
  */
 function getNodeForId(nodesHash, id) {
   const node = nodesHash[id];
@@ -191,12 +191,12 @@ function getNodeForId(nodesHash, id) {
  */
 function constructEdgesData(fullDataSet) {
   const {
-    edgesData, // TEdgeNode[];
-    flowsData, // TFlowNode[];
-    nodesSupplyChainData, // TGraphNode[];
-    // nodesData, // TDatabaseNode[];
+    edgesData, // TEdgesData;
+    flowsData, // TFlowsData;
+    nodesSupplyChainData, // TGraphsData;
+    // nodesData, // TNodesData;
     graphsHash, // TGraphHash;
-    nodesHash, // TDatabaseHash;
+    nodesHash, // TNodeHash;
   } = fullDataSet;
   console.log('[constructEdgesData] start', {
     edgesData,

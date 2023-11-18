@@ -1,28 +1,33 @@
 type TGraphId = number;
-type TDatabaseId = number;
+type TNodeId = number;
 
-type TEdgeNode = any;
-type TFlowNode = any;
-type TGraphNode = any;
-type TDatabaseNode = any;
+type TEdgeItem = any;
+type TFlowItem = any;
+type TGraphItem = any;
+type TNodeItem = any;
 
-type TGraphHash = Record<TGraphId, TGraphNode>;
-type TDatabaseHash = Record<TDatabaseId, TDatabaseNode>;
+type TEdgesData = TEdgesData;
+type TGraphsData = TGraphsData;
+type TFlowsData = TFlowsData;
+type TNodesData = TNodesData;
+
+type TGraphHash = Record<TGraphId, TGraphItem>;
+type TNodeHash = Record<TNodeId, TNodeItem>;
 
 interface TDataSet {
-  edgesData: TEdgeNode[];
-  flowsData: TFlowNode[];
-  nodesSupplyChainData: TGraphNode[];
-  nodesData: TDatabaseNode[];
+  edgesData: TEdgesData;
+  flowsData: TFlowsData;
+  nodesSupplyChainData: TGraphsData;
+  nodesData: TNodesData;
 }
 
 interface TFullDataSet extends TDataSet {
   graphsHash: TGraphHash;
-  nodesHash: TDatabaseHash;
+  nodesHash: TNodeHash;
 }
 
 interface TChartData {
-    from: string;
-    to: string;
-    value: number;
+  from: string;
+  to: string;
+  value: number;
 }
